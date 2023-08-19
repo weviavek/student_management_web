@@ -31,7 +31,6 @@ class EditStudent {
         TextEditingController(text: currentData.phoneNumber);
     TextEditingController ageContoller =
         TextEditingController(text: currentData.age);
-
     PlatformFile? pickedFile;
     String? imagePath = currentData.profilePictureUri != null
         ? currentData.profilePictureUri!
@@ -135,24 +134,69 @@ class EditStudent {
                 ),
               ),
               TextFormField(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) {
+                  if (value != null && value.isEmpty) {
+                    return "Name can't be empty";
+                  }
+                  return null;
+                },
                 controller: nameContoller,
                 decoration: const InputDecoration(
                     hintText: "Student Name", labelText: "Student Name"),
               ),
               TextFormField(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) {
+                  if (value != null && value.isEmpty) {
+                    return "Student ID can't be empty";
+                  } else if (!RegExp(r'^[0-9]{5}$').hasMatch(value!)) {
+                    return "Enter valid Student ID";
+                  }
+                  return null;
+                },
                 controller: studentIDContoller,
                 decoration: const InputDecoration(
                     hintText: "Student ID", labelText: "Student ID"),
               ),
               TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) {
+                    if (value != null && value.isEmpty) {
+                      return "Email can't be empty";
+                    } else if (!RegExp(r'^[\w-\.]+@([\w-\.]+\.)+[a-zA-Z]{2,}$')
+                        .hasMatch(value!)) {
+                      return "Enter valid Email ID";
+                    } else {
+                      return null;
+                    }
+                  },
                   controller: emailIDContoller,
                   decoration: const InputDecoration(
                       hintText: "Email ID", labelText: "Email ID")),
               TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) {
+                    if (value != null && value.isEmpty) {
+                      return "Phone number can't be empty";
+                    } else if (!RegExp(r'^[0-9]{10}$').hasMatch(value!)) {
+                      return "Enter valid Phone number";
+                    }
+                    return null;
+                  },
                   controller: phoneNumberContoller,
                   decoration: const InputDecoration(
                       hintText: "Phone Number", labelText: "Phone Number")),
               TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) {
+                    if (value != null && value.isEmpty) {
+                      return "Age can't be empty";
+                    } else if (!RegExp(r'^[0-9]{2}$').hasMatch(value!)) {
+                      return "Enter correct age";
+                    }
+                    return null;
+                  },
                   controller: ageContoller,
                   decoration:
                       const InputDecoration(hintText: "Age", labelText: "Age"))
