@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "235652828411",
+    "firebase_url": "https://student-management-web-b973c-default-rtdb.firebaseio.com",
+    "project_id": "student-management-web-b973c",
+    "storage_bucket": "student-management-web-b973c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:235652828411:android:d6f551b82d5d090aa4b45e",
+        "android_client_info": {
+          "package_name": "com.weviavek.student_management_website"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "235652828411-qni1a6u6cm802pbpmluvt2flrm6hifkt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIm28xORLIgUoJCELbHes_O7XIxYoIByA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "235652828411-qni1a6u6cm802pbpmluvt2flrm6hifkt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "235652828411-5lagaspq3tqcvjukuurj3nrqmhtlvrso.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.weviavek.studentManagementWebsite.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

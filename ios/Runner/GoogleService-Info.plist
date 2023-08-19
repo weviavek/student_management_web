@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>235652828411-bbj11p032g07l0el79o8o9hqpc730s3q.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.235652828411-bbj11p032g07l0el79o8o9hqpc730s3q</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBVYfcZ0AL3Rz6lzZaAspPFIAZHb8n5Iwc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>235652828411</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.weviavek.studentManagementWebsite</string>
+	<key>PROJECT_ID</key>
+	<string>student-management-web-b973c</string>
+	<key>STORAGE_BUCKET</key>
+	<string>student-management-web-b973c.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:235652828411:ios:4c8592222203fe75a4b45e</string>
+</dict>
+</plist>
