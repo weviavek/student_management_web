@@ -116,17 +116,16 @@ class EditStudent {
                               child: FloatingActionButton(
                                 onPressed: () async {
                                   await imagePickHelper();
-                                  if (pickedFile != null) {
-                                    Uint8List? imageInBytes = pickedFile!.bytes;
-                                    imageChanged = true;
-                                    var tempReference = FirebaseStorage.instance
-                                        .ref()
-                                        .child('images/temp.jpg');
-                                    tempReference.putData(imageInBytes!);
-                                    imageNotifier.value = true;
-                                    imageNotifier.value = true;
-                                    Notifiers.notifyImage();
-                                  }
+                                  Uint8List? imageInBytes = pickedFile!.bytes;
+                                  var tempReference = FirebaseStorage.instance
+                                      .ref()
+                                      .child('images/temp.jpg');
+                                  await tempReference.putData(imageInBytes!);
+                                  imageChanged = true;
+                                  imagePath =
+                                      await tempReference.getDownloadURL();
+                                  imageNotifier.value = true;
+                                  Notifiers.notifyImage();
                                 },
                                 child: const Icon(Icons.add_a_photo_rounded),
                               ),
