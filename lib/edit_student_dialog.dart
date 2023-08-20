@@ -54,119 +54,115 @@ class EditStudent {
           pickedFile = value != null ? value.files.first : pickedFile);
     }
 
+    Future<void> imageFunction() async {
+      await imagePickHelper();
+      Uint8List? imageInBytes = pickedFile!.bytes;
+      var tempReference =
+          FirebaseStorage.instance.ref().child('images/temp.jpg');
+      await tempReference.putData(imageInBytes!);
+      imageChanged = true;
+      imagePath = await tempReference.getDownloadURL();
+      imageNotifier.value = true;
+      Notifiers.notifyImage();
+    }
+
+    final formKey = GlobalKey<FormState>();
     if (context.mounted) {
       return showDialog(
         context: context,
         builder: (context) => AlertDialog(
           title: const Text("Please Fill Up Following Details"),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ValueListenableBuilder(
-                valueListenable: imageNotifier,
-                builder: (context, value, child) => Flexible(
-                  child: SizedBox(
-                    width: 300,
-                    height: 300,
-                    child: imagePath != null
-                        ? Stack(children: [
-                            CircleAvatar(
-                              backgroundImage: NetworkImage(imagePath!),
-                              maxRadius: 300,
-                            ),
-                            Align(
-                              alignment: Alignment.bottomLeft,
-                              child: FloatingActionButton(
-                                onPressed: () {
-                                  imagePath = null;
-                                  pickedFile = null;
-                                  Notifiers.notifyImage();
-                                },
-                                child: const Icon(Icons.delete_rounded),
+          content: Form(
+            key: formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ValueListenableBuilder(
+                  valueListenable: imageNotifier,
+                  builder: (context, value, child) => Flexible(
+                    child: SizedBox(
+                      width: 300,
+                      height: 300,
+                      child: imagePath != null
+                          ? Stack(children: [
+                              CircleAvatar(
+                                backgroundImage: NetworkImage(imagePath!),
+                                maxRadius: 300,
                               ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomRight,
-                              child: FloatingActionButton(
-                                onPressed: () async {
-                                  await imagePickHelper();
-                                  Uint8List? imageInBytes = pickedFile!.bytes;
-                                  var tempReference = FirebaseStorage.instance
-                                      .ref()
-                                      .child('images/temp.jpg');
-                                  await tempReference.putData(imageInBytes!);
-                                  imageChanged = true;
-                                  imagePath =
-                                      await tempReference.getDownloadURL();
-                                  imageNotifier.value = true;
-                                  Notifiers.notifyImage();
-                                },
-                                child: const Icon(Icons.edit),
+                              Align(
+                                alignment: Alignment.bottomLeft,
+                                child: FloatingActionButton(
+                                  onPressed: () {
+                                    imagePath = null;
+                                    pickedFile = null;
+                                    Notifiers.notifyImage();
+                                  },
+                                  child: const Icon(Icons.delete_rounded),
+                                ),
                               ),
-                            )
-                          ])
-                        : Stack(children: [
-                            const CircleAvatar(
-                              backgroundImage: NetworkImage(
-                                  "https://firebasestorage.googleapis.com/v0/b/student-management-web-b973c.appspot.com/o/images%2Fdefault_image.jpg?alt=media&token=34741d05-39ce-47d7-887d-037b85cc037a"),
-                              maxRadius: 300,
-                            ),
-                            Align(
-                              alignment: Alignment.bottomRight,
-                              child: FloatingActionButton(
-                                onPressed: () async {
-                                  await imagePickHelper();
-                                  Uint8List? imageInBytes = pickedFile!.bytes;
-                                  var tempReference = FirebaseStorage.instance
-                                      .ref()
-                                      .child('images/temp.jpg');
-                                  await tempReference.putData(imageInBytes!);
-                                  imageChanged = true;
-                                  imagePath =
-                                      await tempReference.getDownloadURL();
-                                  imageNotifier.value = true;
-                                  Notifiers.notifyImage();
-                                },
-                                child: const Icon(Icons.add_a_photo_rounded),
+                              Align(
+                                alignment: Alignment.bottomRight,
+                                child: FloatingActionButton(
+                                  onPressed: () async {
+                                    await imageFunction();
+                                  },
+                                  child: const Icon(Icons.edit),
+                                ),
+                              )
+                            ])
+                          : Stack(children: [
+                              const CircleAvatar(
+                                backgroundImage: NetworkImage(
+                                    "https://firebasestorage.googleapis.com/v0/b/student-management-web-b973c.appspot.com/o/images%2Fdefault_image.jpg?alt=media&token=34741d05-39ce-47d7-887d-037b85cc037a"),
+                                maxRadius: 300,
                               ),
-                            )
-                          ]),
+                              Align(
+                                alignment: Alignment.bottomRight,
+                                child: FloatingActionButton(
+                                  onPressed: () async {
+                                    await imageFunction();
+                                  },
+                                  child: const Icon(Icons.add_a_photo_rounded),
+                                ),
+                              )
+                            ]),
+                    ),
                   ),
                 ),
-              ),
-              TextFormField(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) => Validator.nameValidator(value),
-                controller: nameContoller,
-                decoration: const InputDecoration(
-                    hintText: "Student Name", labelText: "Student Name"),
-              ),
-              TextFormField(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) => Validator.studentIDValidator(value),
-                controller: studentIDContoller,
-                decoration: const InputDecoration(
-                    hintText: "Student ID", labelText: "Student ID"),
-              ),
-              TextFormField(
+                TextFormField(
                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (value) => Validator.emailValidator(value),
-                  controller: emailIDContoller,
+                  validator: (value) => Validator.nameValidator(value),
+                  controller: nameContoller,
                   decoration: const InputDecoration(
-                      hintText: "Email ID", labelText: "Email ID")),
-              TextFormField(
+                      hintText: "Student Name", labelText: "Student Name"),
+                ),
+                TextFormField(
                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (value) => Validator.phoneNumberValidator(value),
-                  controller: phoneNumberContoller,
+                  validator: (value) => Validator.studentIDValidator(value),
+                  controller: studentIDContoller,
                   decoration: const InputDecoration(
-                      hintText: "Phone Number", labelText: "Phone Number")),
-              TextFormField(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (value) => Validator.ageValidator(value),
-                  controller: ageContoller,
-                  decoration:
-                      const InputDecoration(hintText: "Age", labelText: "Age"))
-            ],
+                      hintText: "Student ID", labelText: "Student ID"),
+                ),
+                TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) => Validator.emailValidator(value),
+                    controller: emailIDContoller,
+                    decoration: const InputDecoration(
+                        hintText: "Email ID", labelText: "Email ID")),
+                TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) => Validator.phoneNumberValidator(value),
+                    controller: phoneNumberContoller,
+                    decoration: const InputDecoration(
+                        hintText: "Phone Number", labelText: "Phone Number")),
+                TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) => Validator.ageValidator(value),
+                    controller: ageContoller,
+                    decoration: const InputDecoration(
+                        hintText: "Age", labelText: "Age"))
+              ],
+            ),
           ),
           actions: [
             TextButton(
@@ -177,35 +173,38 @@ class EditStudent {
                 child: const Text("Clear")),
             ElevatedButton(
                 onPressed: () async {
-                  if (imageChanged) {
-                    var tempReference =
-                        FirebaseStorage.instance.ref().child('images/temp.jpg');
-                    tempReference.delete();
-                  }
-                  var imageReference = FirebaseStorage.instance.ref().child(
-                      'images/${nameContoller.text}${studentIDContoller.text}.jpg');
-                  Navigator.of(context).pop();
-                  if (pickedFile != null) {
-                    Uint8List? imageInBytes = pickedFile!.bytes;
-                    await imageReference.putData(imageInBytes!);
-                    imagePath = await imageReference.getDownloadURL();
-                  }
+                  if (formKey.currentState!.validate()) {
+                    if (imageChanged) {
+                      var tempReference = FirebaseStorage.instance
+                          .ref()
+                          .child('images/temp.jpg');
+                      tempReference.delete();
+                    }
+                    var imageReference = FirebaseStorage.instance.ref().child(
+                        'images/${nameContoller.text}${studentIDContoller.text}.jpg');
+                    Navigator.of(context).pop();
+                    if (pickedFile != null) {
+                      Uint8List? imageInBytes = pickedFile!.bytes;
+                      await imageReference.putData(imageInBytes!);
+                      imagePath = await imageReference.getDownloadURL();
+                    }
 
-                  Map<String, String?> currentStudentData = {
-                    'name': nameContoller.text.toString(),
-                    'studentID': studentIDContoller.text.toString(),
-                    'email': emailIDContoller.text.toString(),
-                    'phone': phoneNumberContoller.text.toString(),
-                    'age': ageContoller.text.toString(),
-                    'profilePictureUri': imagePath
-                  };
+                    Map<String, String?> currentStudentData = {
+                      'name': nameContoller.text.toString(),
+                      'studentID': studentIDContoller.text.toString(),
+                      'email': emailIDContoller.text.toString(),
+                      'phone': phoneNumberContoller.text.toString(),
+                      'age': ageContoller.text.toString(),
+                      'profilePictureUri': imagePath
+                    };
 
-                  await FirebaseDatabase.instance
-                      .ref('Students')
-                      .child(currentKey)
-                      .update(currentStudentData);
-                  Notifiers.notifyDetails();
-                  Notifiers.notifyList();
+                    await FirebaseDatabase.instance
+                        .ref('Students')
+                        .child(currentKey)
+                        .update(currentStudentData);
+                    Notifiers.notifyDetails();
+                    Notifiers.notifyList();
+                  }
                 },
                 child: const Text("Submit"))
           ],

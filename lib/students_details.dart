@@ -73,8 +73,8 @@ class StudentDetails extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 8),
-                          TextTile().customTextBox(availableWidth,
-                              "Student ID", student!.studentID!),
+                          TextTile().customTextBox(availableWidth, "Student ID",
+                              student!.studentID!),
                           TextTile().customTextBox(
                               availableWidth, "Email ID", student!.email!),
                           TextTile().customTextBox(availableWidth,
@@ -116,6 +116,7 @@ class StudentDetails extends StatelessWidget {
                                                         Radius.circular(30)),
                                             child: Center(
                                               child: Dialogs.showDeleteAlert(
+                                                  student!.studentID!,
                                                   student!.name!,
                                                   context,
                                                   index,
@@ -128,6 +129,7 @@ class StudentDetails extends StatelessWidget {
                                       context: context,
                                       builder: (context) =>
                                           Dialogs.showDeleteAlert(
+                                              student!.studentID!,
                                               student!.name!,
                                               context,
                                               index,

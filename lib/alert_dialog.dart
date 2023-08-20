@@ -1,12 +1,13 @@
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:student_management_website/student_list.dart';
 
 import 'natifiers.dart';
 
 class Dialogs {
-  static Widget showDeleteAlert(
-      String name, BuildContext context, int index, String deleteKey) {
+  static Widget showDeleteAlert(String id, String name, BuildContext context,
+      int index, String deleteKey) {
     return AlertDialog(
       content: Text("Do you want to delete $name permenently?"),
       actions: [
@@ -16,6 +17,9 @@ class Dialogs {
         ElevatedButton(
             onPressed: () async {
               StudentListState.listOfStudents.removeAt(index);
+              final tempRef =
+                  FirebaseStorage.instance.ref().child('images/$name$id.jpg');
+              tempRef.delete();
               Navigator.of(context).popUntil((route) => route.isFirst);
               DatabaseReference dbRef =
                   FirebaseDatabase.instance.ref().child("Students");

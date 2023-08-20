@@ -123,14 +123,20 @@ class StudentListState extends State<StudentList> {
                                         ),
                                         trailing: IconButton(
                                             onPressed: () {
-                                              showDialog(context: context, builder:(context) => 
-                                              Dialogs.showDeleteAlert(
-                                                  listOfStudents[index]
-                                                      .currentData!
-                                                      .name!,
-                                                  context,
-                                                  index,
-                                                  listOfStudents[index].key!));
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (context) =>
+                                                      Dialogs.showDeleteAlert(
+                                                          listOfStudents[index]
+                                                              .currentData!
+                                                              .studentID!,
+                                                          listOfStudents[index]
+                                                              .currentData!
+                                                              .name!,
+                                                          context,
+                                                          index,
+                                                          listOfStudents[index]
+                                                              .key!));
                                             },
                                             icon: const Icon(
                                               Icons.delete_rounded,
@@ -146,14 +152,20 @@ class StudentListState extends State<StudentList> {
                                     : Desktop().desktopTile(
                                         snapshot.data!,
                                         () {
-                                          showDialog(context: context, builder:(context) => 
-                                              Dialogs.showDeleteAlert(
-                                                  listOfStudents[index]
-                                                      .currentData!
-                                                      .name!,
-                                                  context,
-                                                  index,
-                                                  listOfStudents[index].key!));
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) =>
+                                                  Dialogs.showDeleteAlert(
+                                                      listOfStudents[index]
+                                                          .currentData!
+                                                          .studentID!,
+                                                      listOfStudents[index]
+                                                          .currentData!
+                                                          .name!,
+                                                      context,
+                                                      index,
+                                                      listOfStudents[index]
+                                                          .key!));
                                         },
                                         context,
                                         () => Navigator.push(
