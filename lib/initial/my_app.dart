@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
-import 'package:student_management_website/student_list.dart';
-import 'package:student_management_website/students_details.dart';
+import 'package:student_management_website/pages/student_list.dart';
+import 'package:student_management_website/pages/students_details.dart';
 
-import 'global_data.dart';
+import '../global/global_data.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

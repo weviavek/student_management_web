@@ -5,9 +5,9 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:student_management_website/model/student.dart';
-import 'package:student_management_website/validators.dart';
+import 'package:student_management_website/functions/validators.dart';
 
-import 'natifiers.dart';
+import '../functions/natifiers.dart';
 
 class EditStudent {
   final String currentKey;

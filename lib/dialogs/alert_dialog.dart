@@ -1,9 +1,9 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:student_management_website/student_list.dart';
+import 'package:student_management_website/pages/student_list.dart';
 
-import 'natifiers.dart';
+import '../functions/natifiers.dart';
 
 class Dialogs {
   static Widget showDeleteAlert(String id, String name, BuildContext context,

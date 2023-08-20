@@ -4,10 +4,9 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:student_management_website/natifiers.dart';
-import 'package:student_management_website/warning_no_image.dart';
+import 'package:student_management_website/functions/natifiers.dart';
 
-import 'validators.dart';
+import '../functions/validators.dart';
 
 class StudentDialogs {
   BuildContext context;

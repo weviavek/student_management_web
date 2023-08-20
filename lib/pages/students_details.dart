@@ -1,10 +1,10 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:student_management_website/alert_dialog.dart';
-import 'package:student_management_website/custom_text_tile.dart';
-import 'package:student_management_website/edit_student_dialog.dart';
+import 'package:student_management_website/dialogs/alert_dialog.dart';
+import 'package:student_management_website/custom_tiles/custom_text_tile.dart';
+import 'package:student_management_website/dialogs/edit_student_dialog.dart';
 import 'package:student_management_website/model/student.dart';
-import 'package:student_management_website/natifiers.dart';
+import 'package:student_management_website/functions/natifiers.dart';
 
 class StudentDetails extends StatelessWidget {
   final String deleteKey;

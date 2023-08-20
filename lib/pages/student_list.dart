@@ -1,13 +1,13 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:student_management_website/alert_dialog.dart';
-import 'package:student_management_website/desktop_tile.dart';
-import 'package:student_management_website/global_data.dart';
+import 'package:student_management_website/dialogs/alert_dialog.dart';
+import 'package:student_management_website/custom_tiles/desktop_tile.dart';
+import 'package:student_management_website/global/global_data.dart';
 import 'package:student_management_website/model/student.dart';
-import 'package:student_management_website/natifiers.dart';
-import 'package:student_management_website/new_student_dialog.dart';
-import 'package:student_management_website/search_page.dart';
-import 'package:student_management_website/students_details.dart';
+import 'package:student_management_website/functions/natifiers.dart';
+import 'package:student_management_website/dialogs/new_student_dialog.dart';
+import 'package:student_management_website/pages/search_page.dart';
+import 'package:student_management_website/pages/students_details.dart';
 
 class StudentList extends StatefulWidget {
   const StudentList({super.key});
