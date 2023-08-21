@@ -9,7 +9,7 @@ class Validator {
     return null;
   }
 
-  static String? studentIDValidator(String? value) {
+  static String? studentIDValidator(String? value,bool isModifing) {
     bool checker() {
       for (StudentModel current in StudentListState.listOfStudents) {
         if (current.currentData!.studentID == value) {
@@ -23,7 +23,7 @@ class Validator {
       return "Student ID can't be empty";
     } else if (!RegExp(r'^[0-9]{5}$').hasMatch(value!)) {
       return "Enter valid Student ID";
-    } else if (checker()) {
+    } else if (!isModifing&& checker()) {
       return "Student ID already exists";
     }
     return null;

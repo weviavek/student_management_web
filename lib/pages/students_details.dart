@@ -99,6 +99,10 @@ class StudentDetails extends StatelessWidget {
                                   ),
                                 ),
                                 onTap: () async {
+                                  bool hasImage =
+                                      student!.profilePictureUri == null
+                                          ? false
+                                          : true;
                                   if (MediaQuery.sizeOf(context).width < 600) {
                                     showBottomSheet(
                                       enableDrag: true,
@@ -119,6 +123,7 @@ class StudentDetails extends StatelessWidget {
                                                   student!.studentID!,
                                                   student!.name!,
                                                   context,
+                                                  hasImage,
                                                   index,
                                                   deleteKey),
                                             )),
@@ -132,6 +137,7 @@ class StudentDetails extends StatelessWidget {
                                               student!.studentID!,
                                               student!.name!,
                                               context,
+                                              hasImage,
                                               index,
                                               deleteKey),
                                     );

@@ -46,112 +46,114 @@ class StudentDialogs {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text("Please Fill Up Following Details"),
-        content: Form(
-          key: formKey,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ValueListenableBuilder(
-                valueListenable: imageNotifier,
-                builder: (context, value, child) => Flexible(
-                  child: SizedBox(
-                    width: 300,
-                    height: 300,
-                    child: imagePath != null
-                        ? Stack(children: [
-                            CircleAvatar(
-                              backgroundImage: NetworkImage(imagePath!),
-                              maxRadius: 300,
-                            ),
-                            Align(
-                              alignment: Alignment.bottomLeft,
-                              child: FloatingActionButton(
-                                onPressed: () {
-                                  imagePath = null;
-                                  pickedFile = null;
-                                  Notifiers.notifyImage();
-                                },
-                                child: const Icon(Icons.delete_rounded),
+        content: SingleChildScrollView(
+          child: Form(
+            key: formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ValueListenableBuilder(
+                  valueListenable: imageNotifier,
+                  builder: (context, value, child) => Flexible(
+                    child: SizedBox(
+                      width: 300,
+                      height: 300,
+                      child: imagePath != null
+                          ? Stack(children: [
+                              CircleAvatar(
+                                backgroundImage: NetworkImage(imagePath!),
+                                maxRadius: 300,
                               ),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomRight,
-                              child: FloatingActionButton(
-                                onPressed: () async {
-                                  await imagePickHelper();
-                                  Uint8List? imageInBytes = pickedFile!.bytes;
-                                  await tempImageReference
-                                      .putData(imageInBytes!);
-                                  imagePath =
-                                      await tempImageReference.getDownloadURL();
-                                  imageNotifier.value = true;
-                                  Notifiers.notifyImage();
-                                },
-                                child: const Icon(Icons.edit),
+                              Align(
+                                alignment: Alignment.bottomLeft,
+                                child: FloatingActionButton(
+                                  onPressed: () {
+                                    imagePath = null;
+                                    pickedFile = null;
+                                    Notifiers.notifyImage();
+                                  },
+                                  child: const Icon(Icons.delete_rounded),
+                                ),
                               ),
-                            )
-                          ])
-                        : Stack(children: [
-                            const CircleAvatar(
-                              backgroundImage: NetworkImage(
-                                  "https://firebasestorage.googleapis.com/v0/b/student-management-web-b973c.appspot.com/o/images%2Fdefault_image.jpg?alt=media&token=34741d05-39ce-47d7-887d-037b85cc037a"),
-                              maxRadius: 300,
-                            ),
-                            Align(
-                              alignment: Alignment.bottomRight,
-                              child: FloatingActionButton(
-                                onPressed: () async {
-                                  await imagePickHelper();
-                                  if (pickedFile != null) {
+                              Align(
+                                alignment: Alignment.bottomRight,
+                                child: FloatingActionButton(
+                                  onPressed: () async {
+                                    await imagePickHelper();
                                     Uint8List? imageInBytes = pickedFile!.bytes;
                                     await tempImageReference
                                         .putData(imageInBytes!);
-                                    imagePath = await tempImageReference
-                                        .getDownloadURL();
+                                    imagePath =
+                                        await tempImageReference.getDownloadURL();
                                     imageNotifier.value = true;
                                     Notifiers.notifyImage();
-                                  }
-                                },
-                                child: const Icon(Icons.add_a_photo_rounded),
+                                  },
+                                  child: const Icon(Icons.edit),
+                                ),
+                              )
+                            ])
+                          : Stack(children: [
+                              const CircleAvatar(
+                                backgroundImage: NetworkImage(
+                                    "https://firebasestorage.googleapis.com/v0/b/student-management-web-b973c.appspot.com/o/images%2Fdefault_image.jpg?alt=media&token=34741d05-39ce-47d7-887d-037b85cc037a"),
+                                maxRadius: 300,
                               ),
-                            )
-                          ]),
+                              Align(
+                                alignment: Alignment.bottomRight,
+                                child: FloatingActionButton(
+                                  onPressed: () async {
+                                    await imagePickHelper();
+                                    if (pickedFile != null) {
+                                      Uint8List? imageInBytes = pickedFile!.bytes;
+                                      await tempImageReference
+                                          .putData(imageInBytes!);
+                                      imagePath = await tempImageReference
+                                          .getDownloadURL();
+                                      imageNotifier.value = true;
+                                      Notifiers.notifyImage();
+                                    }
+                                  },
+                                  child: const Icon(Icons.add_a_photo_rounded),
+                                ),
+                              )
+                            ]),
+                    ),
                   ),
                 ),
-              ),
-              TextFormField(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) => Validator.nameValidator(value),
-                controller: nameContoller,
-                decoration: const InputDecoration(
-                    hintText: "Student Name", labelText: "Student Name"),
-              ),
-              TextFormField(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) => Validator.studentIDValidator(value),
-                controller: studentIDContoller,
-                decoration: const InputDecoration(
-                    hintText: "Student ID", labelText: "Student ID"),
-              ),
-              TextFormField(
+                TextFormField(
                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (value) => Validator.emailValidator(value),
-                  controller: emailIDContoller,
+                  validator: (value) => Validator.nameValidator(value),
+                  controller: nameContoller,
                   decoration: const InputDecoration(
-                      hintText: "Email ID", labelText: "Email ID")),
-              TextFormField(
+                      hintText: "Student Name", labelText: "Student Name"),
+                ),
+                TextFormField(
                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (value) => Validator.phoneNumberValidator(value),
-                  controller: phoneNumberContoller,
+                  validator: (value) => Validator.studentIDValidator(value,false),
+                  controller: studentIDContoller,
                   decoration: const InputDecoration(
-                      hintText: "Phone Number", labelText: "Phone Number")),
-              TextFormField(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (value) => Validator.ageValidator(value),
-                  controller: ageContoller,
-                  decoration:
-                      const InputDecoration(hintText: "Age", labelText: "Age"))
-            ],
+                      hintText: "Student ID", labelText: "Student ID"),
+                ),
+                TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) => Validator.emailValidator(value),
+                    controller: emailIDContoller,
+                    decoration: const InputDecoration(
+                        hintText: "Email ID", labelText: "Email ID")),
+                TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) => Validator.phoneNumberValidator(value),
+                    controller: phoneNumberContoller,
+                    decoration: const InputDecoration(
+                        hintText: "Phone Number", labelText: "Phone Number")),
+                TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) => Validator.ageValidator(value),
+                    controller: ageContoller,
+                    decoration:
+                        const InputDecoration(hintText: "Age", labelText: "Age"))
+              ],
+            ),
           ),
         ),
         actions: [

@@ -7,7 +7,7 @@ import '../functions/natifiers.dart';
 
 class Dialogs {
   static Widget showDeleteAlert(String id, String name, BuildContext context,
-      int index, String deleteKey) {
+      bool hasImage, int index, String deleteKey) {
     return AlertDialog(
       content: Text("Do you want to delete $name permenently?"),
       actions: [
@@ -17,9 +17,11 @@ class Dialogs {
         ElevatedButton(
             onPressed: () async {
               StudentListState.listOfStudents.removeAt(index);
-              final tempRef =
-                  FirebaseStorage.instance.ref().child('images/$name$id.jpg');
-              tempRef.delete();
+              if (hasImage) {
+                final tempRef =
+                    FirebaseStorage.instance.ref().child('images/$name$id.jpg');
+                tempRef.delete();
+              }
               Navigator.of(context).popUntil((route) => route.isFirst);
               DatabaseReference dbRef =
                   FirebaseDatabase.instance.ref().child("Students");
