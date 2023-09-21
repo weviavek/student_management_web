@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:student_management_website/initial/firebase_options.dart';
+import 'package:student_management_website/firebase_options.dart';
 
 import 'initial/my_app.dart';
 
